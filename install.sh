@@ -40,7 +40,7 @@ else
 fi )
 
 # Identifica a necessidade de instalar o docker
-docker run hello-world &> /dev/null || (\
+docker run --rm hello-world &> /dev/null || (\
 if [ "$OS" == "linux" ]; then
 		if [ "$DISTRO" == "debian-like" ]; then
     apt-get update
