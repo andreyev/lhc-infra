@@ -73,7 +73,7 @@ fi )
 # Identifica a necessidade de instalar o helm
 command -v helm &> /dev/null || (\
 if [ "$OS" == "linux" ]; then
-	curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
+	curl -s https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
 	command -v helm &> /dev/null || ( echo "Helm não pode ser instalado" ; exit 1 )
 else
 	echo "Não consigo instalar helm neste sistema operacional"
