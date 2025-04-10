@@ -1,29 +1,26 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: applicationset-manager
+  name: root-appset
   namespace: argocd
 spec:
   generators:
     - git:
-        repoURL: {{ .Values.repository }}
-        revision: {{ .Values.branch }}
+        repoURL: https://github.com/andreyev/lhc-infra.git
+        targetRevision: add_roles
         directories:
-          - path: 'roles/base'
-        helm:
-          valueFiles:
-          - values.yaml
+          - path: roles/*
   template:
     metadata:
-      name: '{{path.basename}}'
+      name: '{{path.basename}}-appset'
     spec:
       project: default
       source:
-        repoURL: {{ .Values.repository }}
-        targetRevision: {{ .Values.branch }}
+        repoURL: https://github.com/andreyev/lhc-infra.git
+        targetRevision: add_roles
         path: '{{path}}'
       destination:
-        server: 'https://kubernetes.default.svc'
+        server: https://kubernetes.default.svc
         namespace: argocd
       syncPolicy:
         automated:
