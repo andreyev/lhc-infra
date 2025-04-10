@@ -35,7 +35,7 @@ command -v kubectl &> /dev/null || \
   curl -sLO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/${ARCH}/kubectl"
   chmod +x kubectl
   mv kubectl /usr/local/bin/
-	command -v kubectl &> /dev/null || ( echo "Kubectl não pode ser instalado" ; exit 1 )
+  command -v kubectl &> /dev/null || ( echo "Kubectl não pode ser instalado" ; exit 1 )
 else
 	echo "Não consigo instalar kubectl neste sistema operacional"
 	exit 1
