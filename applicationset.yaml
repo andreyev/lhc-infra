@@ -10,9 +10,9 @@ spec:
         revision: {{ .Values.branch }}
         directories:
           - path: 'roles/base'
-		    helm:
-		      valueFiles:
-		        - values.yaml
+        helm:
+          valueFiles:
+          - values.yaml
   template:
     metadata:
       name: '{{path.basename}}'
