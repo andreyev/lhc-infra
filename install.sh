@@ -2,6 +2,15 @@
 # Aborta a execução em caso algum comando termine com o status diferente de zero
 set -e
 
+# função para descartar stdout e stderror caso -x tenha sido usado
+run_clean() {
+  if [[ $- == *x* ]]; then
+    "$@"
+  else
+    "$@" >/dev/null 2>&1
+  fi
+}
+
 # Executar como root
 if [ "$(id -u)" -ne 0 ]; then
     ( echo "Execute com sudo ou como root" ; exit 1 )
@@ -83,5 +92,5 @@ else
 fi )
 
 export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
-helm repo add argo https://argoproj.github.io/argo-helm
-helm upgrade --install argocd argo/argo-cd --version 7.8.23 -n argocd --create-namespace
+run_clean helm repo add argo https://argoproj.github.io/argo-helm
+run_clean helm upgrade --install argocd argo/argo-cd --version 7.8.23 -n argocd --create-namespace
