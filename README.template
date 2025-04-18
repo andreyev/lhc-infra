@@ -2,3 +2,6 @@ Para instalar, execute:
 ```
 export INSTALL_URL=https://raw.githubusercontent.com/{{REPO_URL}}/refs/heads/{{BRANCH}}/install.sh
 curl -s $INSTALL_URL | sudo env INSTALL_URL="$INSTALL_URL" bash
+```
+
+Para depurar a instalação, adicione `-x` após o comando bash.
