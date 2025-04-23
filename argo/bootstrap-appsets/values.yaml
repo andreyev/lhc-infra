@@ -1,0 +1,5 @@
+repoUrl: https://github.com/andreyev/lhc-infra
+revision: add_roles
+appPaths:
+  - argo/apps/prometheus.yaml
+  - argo/apps/rabbitmq.yaml
