@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: bootstrap-appsets
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/{{GH_ACCOUNT}}.git
+    targetRevision: {{GH_BRANCH}}
+    path: argo/bootstrap-appsets
+    helm:
+      valueFiles:
+        - values.yaml
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: argocd
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

@@ -16,7 +16,8 @@ if [ "$(id -u)" -ne 0 ]; then
     ( echo "Execute com sudo ou como root" ; exit 1 )
 fi
 
-[[ ${INSTALL_URL} ]] || ( echo "URL de instalação não informada" ; exit 1 )
+[ [ ${GH_ACCOUNT} ]] || ( echo "GH_ACCOUNT não informada" ; exit 1 )
+[ [ ${GH_BRANCH} ]] || ( echo "GH_BRANCH não informada" ; exit 1 )
 
 # Identifica o sistema operacional em uso
 case "$(uname -s)" in
@@ -94,3 +95,4 @@ fi )
 export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
 run_clean helm repo add argo https://argoproj.github.io/argo-helm
 run_clean helm upgrade --install argocd argo/argo-cd --version 7.8.23 -n argocd --create-namespace
+run_clean helm upgrade --install installer argo/installer-chart/ -f values.yaml -n installer --create-namespace

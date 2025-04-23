@@ -1,29 +1,28 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: root-appset
+  name: apps-of-appsets
   namespace: argocd
 spec:
   generators:
-    - git:
-        repoURL: https://github.com/andreyev/lhc-infra.git
-        targetRevision: add_roles
-        directories:
-          - path: roles/*
+    - list:
+        elements:
+          - path: applicationsets/auth
+          - path: applicationsets/billing
+          - path: applicationsets/observability
   template:
     metadata:
       name: '{{path.basename}}-appset'
     spec:
       project: default
       source:
-        repoURL: https://github.com/andreyev/lhc-infra.git
-        targetRevision: add_roles
+        repoURL: "${REPO_URL}"
+        targetRevision: main
         path: '{{path}}'
       destination:
         server: https://kubernetes.default.svc
         namespace: argocd
       syncPolicy:
         automated:
-          prune: true
           selfHeal: true
-
+          prune: true

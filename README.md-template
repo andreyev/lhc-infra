@@ -1,0 +1,9 @@
+Para instalar, execute:
+```
+export GH_ACCOUNT={{GH_ACCOUNT}}
+export GH_BRANCH={{GH_BRANCH}}
+export INSTALL_URL=https://raw.githubusercontent.com/{{GH_ACCOUNT}}/refs/heads/{{GH_BRANCH}}/install.sh
+curl -s $INSTALL_URL | sudo env INSTALL_URL="$INSTALL_URL" bash
+```
+
+Para depurar a instalação, adicione `-x` após o comando bash.

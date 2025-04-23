@@ -1,0 +1,28 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: apps-of-appsets
+  namespace: argocd
+spec:
+  generators:
+    - list:
+        elements:
+{{- range .Values.appPaths }}
+          - path: {{ . | quote }}
+{{- end }}
+  template:
+    metadata:
+      name: '{{path.basename}}-appset'
+    spec:
+      project: default
+      source:
+        repoURL: "{{ .Values.repoUrl }}"
+        targetRevision: "{{ .Values.revision }}"
+        path: '{{path}}'
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: argocd
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true

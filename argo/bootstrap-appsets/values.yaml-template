@@ -1,0 +1,5 @@
+repoUrl: https://github.com/{{GH_ACCOUNT}}
+revision: {{GH_BRANCH}}
+appPaths:
+  - argo/apps/prometheus.yaml
+  - argo/apps/rabbitmq.yaml
