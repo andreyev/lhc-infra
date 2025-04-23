@@ -95,4 +95,4 @@ fi )
 export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
 run_clean helm repo add argo https://argoproj.github.io/argo-helm
 run_clean helm upgrade --install argocd argo/argo-cd --version 7.8.23 -n argocd --create-namespace
-run_clean helm upgrade --install installer argo/installer-chart/ -f values.yaml -n installer --create-namespace
+run_clean helm upgrade --install bootstrap-appsets argo/bootstrap-appsets/ -f values.yaml -n bootstrap --create-namespace
