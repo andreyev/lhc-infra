@@ -16,8 +16,8 @@ if [ "$(id -u)" -ne 0 ]; then
     ( echo "Execute com sudo ou como root" ; exit 1 )
 fi
 
-[ [ ${GH_ACCOUNT} ]] || ( echo "GH_ACCOUNT não informada" ; exit 1 )
-[ [ ${GH_BRANCH} ]] || ( echo "GH_BRANCH não informada" ; exit 1 )
+[[ ${GH_ACCOUNT} ]] || ( echo "GH_ACCOUNT não informada" ; exit 1 )
+[[ ${GH_BRANCH} ]] || ( echo "GH_BRANCH não informada" ; exit 1 )
 
 # Identifica o sistema operacional em uso
 case "$(uname -s)" in
